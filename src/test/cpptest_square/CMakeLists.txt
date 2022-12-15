@@ -1,13 +1,17 @@
+project(cpp_square)
 
-# The next line tells CMake and CTest about "test_minimal".
-SET(test_name "cpptest_square" )
+cmake_minimum_required(VERSION 3.15...3.25)
 
-MESSAGE(STATUS "configuring c++ test: " ${test_name})
+message(STATUS "configuring c++ test: " ${PROJECT_NAME})
+
+find_package(OpenVoronoi REQUIRED)
 
 set(SOURCE_FILES polygon_square.cpp)
-add_executable(${test_name} ${SOURCE_FILES})
-add_dependencies(${test_name}  libopenvoronoi)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-target_link_libraries(${test_name} libopenvoronoi ${QD_LIBRARY} )
+target_link_libraries(
+    ${PROJECT_NAME}
+    OpenVoronoi::openvoronoi
+)
 
-ADD_TEST(${test_name} ${test_name})
+add_test(NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})

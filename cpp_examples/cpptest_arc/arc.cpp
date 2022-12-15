@@ -6,15 +6,16 @@
 #include <vector>
 #include <cmath>
 
-#include "voronoidiagram.hpp"
-#include "version.hpp"
-#include "common/point.hpp"
-#include "utility/vd2svg.hpp"
+#include <openvoronoi/common/point.hpp>
+#include <openvoronoi/voronoidiagram.hpp>
+#include <openvoronoi/version.hpp>
+#include <openvoronoi/utility/vd2svg.hpp>
 
 #include <boost/random.hpp>
 #include <boost/timer.hpp>
 #include <boost/foreach.hpp>
 #include <boost/program_options.hpp>
+
 namespace po = boost::program_options;
 
 int main(int argc,char *argv[]) {

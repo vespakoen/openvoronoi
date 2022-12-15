@@ -1,24 +1,27 @@
+project(cpp_polygon)
 
-# The next line tells CMake and CTest about "test_minimal".
-SET(test_name "cpptest_polygon" )
+cmake_minimum_required(VERSION 3.15...3.25)
 
-MESSAGE(STATUS "configuring c++ test: " ${test_name})
+message(STATUS "configuring c++ test: " ${PROJECT_NAME})
+
+find_package(OpenVoronoi REQUIRED)
+find_package(Boost COMPONENTS program_options REQUIRED)
 
 set(SOURCE_FILES polygon.cpp)
-add_executable(${test_name} ${SOURCE_FILES})
-add_dependencies(${test_name}  libopenvoronoi)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-unset(Boost_LIBRARIES) 
-find_package( Boost COMPONENTS program_options REQUIRED)
+target_link_libraries(
+    ${PROJECT_NAME}
+    OpenVoronoi::openvoronoi
+    Boost::program_options
+)
 
-target_link_libraries(${test_name} libopenvoronoi ${Boost_LIBRARIES})
+add_test(${PROJECT_NAME} ${PROJECT_NAME})
 
-ADD_TEST(${test_name} ${test_name})
-
-ADD_TEST(${test_name}_help ${test_name} --help)
+add_test(${PROJECT_NAME}_help ${PROJECT_NAME} --help)
 set_property(
-    TEST ${test_name}_help
+    TEST ${PROJECT_NAME}_help
     PROPERTY WILL_FAIL TRUE
 )
 
-ADD_TEST(${test_name}_d ${test_name} --d ) # run in debug mode
+add_test(${PROJECT_NAME}_d ${PROJECT_NAME} --d) # run in debug mode

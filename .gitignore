@@ -72,7 +72,7 @@ ovd_tst
 *.lyx#
 
 # used in the pycam DXF export example
-src/py/pycam/
+src/pythonlib/openvoronoi/pycam/
 
 # python script output files etc
 python_examples/benchmark
@@ -88,3 +88,7 @@ Picasa.ini
 
 # IDE project data
 .idea/*
+
+boost*/
+Testing/
+qd-2.3.23/

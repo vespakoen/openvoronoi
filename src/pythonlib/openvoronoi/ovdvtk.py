@@ -11,7 +11,7 @@ import time
 import datetime
 # import ocl
 # import pyocl
-import openvoronoi as ovd
+from . import openvoronoi as ovd
 import math
 
 white = (1, 1, 1)

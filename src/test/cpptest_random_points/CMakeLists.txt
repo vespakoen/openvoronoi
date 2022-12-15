@@ -1,25 +1,30 @@
-SET(test_name "cpptest_random_points" )
+project(cpp_random_points)
 
-MESSAGE(STATUS "configuring c++ test: " ${test_name})
+cmake_minimum_required(VERSION 3.15...3.25)
+
+message(STATUS "configuring c++ test: " ${PROJECT_NAME})
+
+find_package(OpenVoronoi REQUIRED)
+find_package(Boost COMPONENTS program_options REQUIRED)
+
 set(SOURCE_FILES random_points.cpp)
-add_executable(${test_name} ${SOURCE_FILES})
-add_dependencies(${test_name}  libopenvoronoi)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-unset(Boost_LIBRARIES) # required because this contains boost-python when we come here
-find_package( Boost COMPONENTS program_options REQUIRED)
+target_link_libraries(
+    ${PROJECT_NAME}
+    OpenVoronoi::openvoronoi
+    Boost::program_options
+)
 
-target_link_libraries(${test_name} libopenvoronoi  ${Boost_LIBRARIES})
-
-
-ADD_TEST(${test_name} ${test_name})
-ADD_TEST(${test_name}_help ${test_name} --help)
+add_test(${PROJECT_NAME} ${PROJECT_NAME})
+add_test(${PROJECT_NAME}_help ${PROJECT_NAME} --help)
 set_property(
-    TEST ${test_name}_help
+    TEST ${PROJECT_NAME}_help
     PROPERTY WILL_FAIL TRUE
 )
 
-ADD_TEST(${test_name}_b ${test_name} --b 2)
-ADD_TEST(${test_name}_200 ${test_name} --n 200)
+add_test(${PROJECT_NAME}_b ${PROJECT_NAME} --b 2)
+add_test(${PROJECT_NAME}_200 ${PROJECT_NAME} --n 200)
 
 # for coverage-testing this takes too long..
-#ADD_TEST(${test_name}_10000 ${test_name} --n 10000)
+#add_test(${PROJECT_NAME}_10000 ${PROJECT_NAME} --n 10000)

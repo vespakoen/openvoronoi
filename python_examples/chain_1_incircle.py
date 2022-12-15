@@ -1,5 +1,4 @@
-import openvoronoi as ovd
-import ovdvtk
+from openvoronoi import ovdvtk, openvoronoi as ovd
 
 import time
 import vtk

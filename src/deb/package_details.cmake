@@ -1,5 +1,5 @@
 
-# message(STATUS " called with SRC_DIR is = " ${SRC_DIR})
+message(STATUS " called with SRC_DIR is = " ${SRC_DIR})
 # message(STATUS " called with version  = " ${MY_VERSION})
 message(STATUS "package_details.cmake: Configuring debian package details.")
 

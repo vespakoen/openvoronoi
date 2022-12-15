@@ -21,7 +21,6 @@ find_library(QD_LIBRARY
    ENV LIBRARY_PATH
 )
 
-    
 if(QD_LIBRARY)
     set(QD_LIBRARY_ optimized ${QD_LIBRARY} debug ${QD_LIBRARY})
     set(QD_LIBRARY ${QD_LIBRARY_} CACHE FILEPATH "The QD library")

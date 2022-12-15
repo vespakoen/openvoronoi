@@ -1,13 +1,19 @@
+project(cpp_offset)
 
-# The next line tells CMake and CTest about "test_minimal".
-SET(test_name "cpptest_offset" )
+cmake_minimum_required(VERSION 3.15...3.25)
 
-MESSAGE(STATUS "configuring c++ test: " ${test_name})
+message(STATUS "configuring c++ test: " ${PROJECT_NAME})
+
+find_package(OpenVoronoi REQUIRED)
+find_package(Boost COMPONENTS program_options REQUIRED)
 
 set(SOURCE_FILES offset.cpp)
-add_executable(${test_name} ${SOURCE_FILES})
-add_dependencies(${test_name}  libopenvoronoi)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} )
 
-target_link_libraries(${test_name} libopenvoronoi )
+target_link_libraries(
+    ${PROJECT_NAME}
+    OpenVoronoi::openvoronoi
+    Boost::program_options
+)
 
-ADD_TEST(${test_name} ${test_name})
+add_test(${PROJECT_NAME} ${PROJECT_NAME})

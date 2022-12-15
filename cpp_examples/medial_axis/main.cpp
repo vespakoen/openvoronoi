@@ -2,12 +2,12 @@
 #include <string>
 #include <iostream>
 
-#include <openvoronoi/medial_axis_filter.hpp>
-#include <openvoronoi/medial_axis_walk.hpp>
-#include <openvoronoi/voronoidiagram.hpp>
-#include <openvoronoi/polygon_interior_filter.hpp>
-#include <openvoronoi/utility/vd2svg.hpp>
-#include <openvoronoi/version.hpp>
+#include "medial_axis_filter.hpp"
+#include "medial_axis_walk.hpp"
+#include "voronoidiagram.hpp"
+#include "polygon_interior_filter.hpp"
+#include "utility/vd2svg.hpp"
+#include "version.hpp"
 
 // OpenVoronoi example program. Uses MedialAxis filter to filter the complete Voronoi diagram
 // down to the medial axis.
@@ -16,7 +16,7 @@ int main() {
     ovd::VoronoiDiagram* vd = new ovd::VoronoiDiagram(1,100); // (r, bins)
     // double r: radius of circle within which all input geometry must fall. use 1 (unit-circle). Scale geometry if necessary.
     // int bins:  bins for face-grid search. roughly sqrt(n), where n is the number of sites is good according to Held.
-     
+
     std::cout << ovd::version() << "\n"; // the git revision-string
     ovd::Point p0(-0.1,-0.2);
     ovd::Point p1(0.2,0.1);

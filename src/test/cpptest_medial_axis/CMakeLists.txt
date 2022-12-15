@@ -1,11 +1,14 @@
-SET(test_name "cpptest_medial_axis" )
+project(cpp_medial_axis)
 
-MESSAGE(STATUS "configuring c++ test: " ${test_name})
+cmake_minimum_required(VERSION 3.15...3.25)
+
+message(STATUS "configuring c++ test: " ${PROJECT_NAME})
+
+find_package(OpenVoronoi REQUIRED)
 
 set(SOURCE_FILES medial_axis.cpp)
-add_executable(${test_name} ${SOURCE_FILES})
-add_dependencies(${test_name}  libopenvoronoi)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-target_link_libraries(${test_name} libopenvoronoi )
+target_link_libraries(${PROJECT_NAME} OpenVoronoi::openvoronoi)
 
-ADD_TEST(${test_name} ${test_name})
+add_test(${PROJECT_NAME} ${PROJECT_NAME})

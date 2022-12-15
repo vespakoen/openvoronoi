@@ -1,29 +1,36 @@
-SET(test_name "cpptest_random_linesegs" )
+project(cpp_random_linesegs)
 
-MESSAGE(STATUS "configuring c++ test: " ${test_name})
+cmake_minimum_required(VERSION 3.15...3.25)
+
+message(STATUS "configuring c++ test: " ${PROJECT_NAME})
+
+find_package(OpenVoronoi REQUIRED)
+find_package(Boost COMPONENTS program_options REQUIRED)
+
 set(SOURCE_FILES random_linesegs.cpp)
-add_executable(${test_name} ${SOURCE_FILES})
-add_dependencies(${test_name}  libopenvoronoi)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-set(Boost_LIBRARIES) # required because this contains boost-python when we come here
-find_package( Boost COMPONENTS program_options REQUIRED)
-target_link_libraries(${test_name} libopenvoronoi ${Boost_LIBRARIES})
-
-ADD_TEST(${test_name} ${test_name}) # must provide --n option!
-set_property(
-    TEST ${test_name}
-    PROPERTY WILL_FAIL TRUE
-)
-ADD_TEST(${test_name}_help ${test_name} --help)
-set_property(
-    TEST ${test_name}_help
-    PROPERTY WILL_FAIL TRUE
+target_link_libraries(
+    ${PROJECT_NAME}
+    OpenVoronoi::openvoronoi
+    Boost::program_options
 )
 
-ADD_TEST(${test_name}_d ${test_name} --n 10 --d )
+add_test(${PROJECT_NAME} ${PROJECT_NAME}) # must provide --n option!
+set_property(
+    TEST ${PROJECT_NAME}
+    PROPERTY WILL_FAIL TRUE
+)
+add_test(${PROJECT_NAME}_help ${PROJECT_NAME} --help)
+set_property(
+    TEST ${PROJECT_NAME}_help
+    PROPERTY WILL_FAIL TRUE
+)
 
-#ADD_TEST(${test_name}_b ${test_name} --b 2)
-ADD_TEST(${test_name}_42 ${test_name} --n 42)
+add_test(${PROJECT_NAME}_d ${PROJECT_NAME} --n 10 --d )
+
+#add_test(${PROJECT_NAME}_b ${PROJECT_NAME} --b 2)
+add_test(${PROJECT_NAME}_42 ${PROJECT_NAME} --n 42)
 
 # for coverage-testing this takes too long..
-#ADD_TEST(${test_name}_10000 ${test_name} --n 10000)
+#add_test(${PROJECT_NAME}_10000 ${PROJECT_NAME} --n 10000)
